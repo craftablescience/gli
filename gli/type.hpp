@@ -20,9 +20,7 @@
 #	define GLI_FORCE_INLINE inline
 #endif//GLM_COMPILER
 
-#define GLI_DISABLE_ASSERT 0
-
-#if defined(NDEBUG) || GLI_DISABLE_ASSERT
+#if defined(NDEBUG) || defined(GLI_DISABLE_ASSERT)
 #	define GLI_ASSERT(test)
 #else
 #	define GLI_ASSERT(test) assert((test))
