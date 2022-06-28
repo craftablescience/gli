@@ -292,7 +292,7 @@ namespace detail
 			texture::extent_type(Header.Width, Header.Height, DepthCount),
 			std::max<texture::size_type>(Header10.ArraySize, 1), FaceCount, MipMapCount);
 
-		GLI_ASSERT(Offset + Texture.size() == Size);
+		GLI_ASSERT(Offset + Texture.size() <= Size); // as long as the loaded size is less than or equal to the expected size its OK
 
 		std::memcpy(Texture.data(), Data + Offset, Texture.size());
 
