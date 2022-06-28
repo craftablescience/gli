@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 cmake_policy(SET CMP0054 NEW)
 
 project(gli)
-set(GLI_VERSION "0.8.3")
+set(GLI_VERSION "0.9.0")
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -12,8 +12,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-enable_testing()
-option(GLI_TEST_ENABLE "Build unit tests" ON)
+option(GLI_TEST_ENABLE "Build unit tests" OFF)
+if(GLI_TEST_ENABLE)
+	enable_testing()
+endif()
 
 add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 add_definitions(-DSOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
@@ -72,8 +74,9 @@ endmacro(addExternalPackageGTC)
 # Add subdirectory
 
 add_subdirectory(gli)
-add_subdirectory(test)
-#add_subdirectory(doc)
+if(GLI_TEST_ENABLE)
+	add_subdirectory(test)
+endif()
 
 ################################
 # Add installer
